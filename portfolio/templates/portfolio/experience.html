@@ -1,0 +1,39 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section id="experience" class="space-y-10 animate-[fadeIn_0.5s_ease-in-out]">
+    <div class="flex items-center gap-4">
+        <h2 class="text-4xl font-extrabold tracking-tight">Professional Experience</h2>
+        <div class="h-px bg-gray-300 dark:bg-gray-800 flex-1"></div>
+    </div>
+
+    <div class="space-y-6">
+        {% for exp in experiences %}
+            <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row gap-6 relative overflow-hidden group">
+                <!-- Subtle accent line on the left -->
+                <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary/20 group-hover:bg-primary transition-colors"></div>
+
+                {% if exp.image %}
+                    <img src="{{ exp.image.url }}" alt="{{ exp.title }}" class="w-16 h-16 rounded-xl object-cover bg-white p-1">
+                {% endif %}
+                <div class="flex-1">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ exp.title }}</h3>
+                            <p class="text-primary font-medium mt-1">{{ exp.company_name }}</p>
+                        </div>
+                        <span class="text-sm text-gray-500 mt-2 md:mt-0 bg-gray-200 dark:bg-gray-800 px-3 py-1 rounded-full inline-block">
+                            {{ exp.start_date|date:"M Y" }} - {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                        </span>
+                    </div>
+                    <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed">{{ exp.about }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <div class="glass-card p-8 rounded-2xl">
+                <p class="text-gray-500">No experience records found.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}

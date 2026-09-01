@@ -1,0 +1,69 @@
+<!-- portfolio/projects.html -->
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section id="projects" class="space-y-10 animate-[fadeIn_0.5s_ease-in-out]">
+    <div class="flex items-center gap-4">
+        <h2 class="text-4xl font-extrabold tracking-tight">Featured Projects</h2>
+        <div class="h-px bg-gray-300 dark:bg-gray-800 flex-1"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {% for project in projects %}
+            <div class="glass-card rounded-2xl overflow-hidden block group hover:border-primary transition-all duration-300 flex flex-col justify-between shadow-lg">
+
+                <!-- Project Image Preview -->
+                {% if project.image %}
+                    <div class="w-full h-56 overflow-hidden bg-gray-900 border-b border-gray-200 dark:border-gray-800 relative">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                {% endif %}
+
+                <div class="p-8 flex flex-col flex-grow justify-between">
+                    <div>
+                        <!-- Title & External Link Icon -->
+                        <a href="{{ project.link|default:'#' }}" target="_blank" class="block">
+                            <h3 class="text-2xl font-bold group-hover:text-primary transition-colors flex items-center justify-between">
+                                {{ project.title }}
+                                {% if project.link %}
+                                    <svg class="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                {% endif %}
+                            </h3>
+                        </a>
+
+                        <!-- Stack & Tools Badges -->
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            {% if project.tech_stack %}
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">
+                                    {{ project.tech_stack }}
+                                </span>
+                            {% endif %}
+                            {% if project.tools_used %}
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700">
+                                    {{ project.tools_used }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Description -->
+                        <p class="mt-4 text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base">{{ project.description }}</p>
+                    </div>
+
+                    <!-- Bottom Action Link -->
+                    {% if project.link %}
+                        <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-800/60 flex items-center justify-between">
+                            <a href="{{ project.link }}" target="_blank" class="text-primary text-sm font-semibold inline-flex items-center gap-1 hover:underline">
+                                View Repository / Live App →
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="glass-card p-8 rounded-2xl col-span-2 text-center">
+                <p class="text-gray-500">No projects added yet. Populate them in the Django Admin panel.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}

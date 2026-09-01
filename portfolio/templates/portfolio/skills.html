@@ -1,0 +1,51 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="space-y-12 animate-fade-in-up">
+    <div class="space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Skills & Expertise</h1>
+        <div class="h-1 w-20 bg-primary rounded"></div>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+            A comprehensive overview of my technical capabilities and professional competencies.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Hard Skills -->
+        <div class="glass-card p-8 rounded-2xl space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3">Hard Skills</h3>
+            <div class="flex flex-wrap gap-3">
+                {% for skill in hard_skills %}
+                <div class="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-lg text-sm font-medium border border-blue-100 dark:border-blue-800/50 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+                    {% if skill.icon %}
+                    <img src="{{ skill.icon.url }}" alt="{{ skill.heading }} icon" class="w-5 h-5 object-contain">
+                    {% endif %}
+                    <span>{{ skill.heading }}</span>
+                </div>
+                {% empty %}
+                <p class="text-sm text-gray-500">No hard skills added yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="glass-card p-8 rounded-2xl space-y-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3">Soft Skills</h3>
+            <div class="flex flex-wrap gap-3">
+                {% for skill in soft_skills %}
+                <div class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+                    {% if skill.icon %}
+                    <img src="{{ skill.icon.url }}" alt="{{ skill.heading }} icon" class="w-5 h-5 object-contain">
+                    {% endif %}
+                    <span>{{ skill.heading }}</span>
+                </div>
+                {% empty %}
+                <p class="text-sm text-gray-500">No soft skills added yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock content %}

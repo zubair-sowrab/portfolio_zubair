@@ -1,0 +1,43 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="space-y-12 animate-fade-in-up">
+    <div class="space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">References</h1>
+        <div class="h-1 w-20 bg-primary rounded"></div>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+            Professional recommendations and contacts.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {% for ref in references %}
+        <div class="glass-card p-8 rounded-2xl flex flex-col h-full relative overflow-hidden">
+            <!-- Decorative Quote Icon -->
+            <svg class="absolute top-6 right-6 w-12 h-12 text-gray-100 dark:text-gray-800/50" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+
+            {% if ref.quote %}
+            <blockquote class="text-gray-700 dark:text-gray-300 italic mb-8 relative z-10 flex-grow">
+                "{{ ref.quote }}"
+            </blockquote>
+            {% endif %}
+
+            <div class="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700 relative z-10">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ ref.name }}</h3>
+                <p class="text-primary font-medium text-sm">{{ ref.position }}</p>
+                {% if ref.contact_info %}
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-2 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    {{ ref.contact_info }}
+                </p>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-gray-500 col-span-full">No references added yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}

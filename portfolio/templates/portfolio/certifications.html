@@ -1,0 +1,37 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<section class="space-y-12 animate-fade-in-up">
+    <div class="space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Certifications</h1>
+        <div class="h-1 w-20 bg-primary rounded"></div>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+            Professional credentials and ongoing learning achievements.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for cert in certifications %}
+        <div class="glass-card p-6 md:p-8 rounded-2xl flex flex-col items-center text-center gap-5 h-full">
+
+            {% if cert.image %}
+            <!-- Increased height and allowed the container to take full width -->
+            <div class="w-full h-48 xl:h-56 flex items-center justify-center">
+                <img src="{{ cert.image.url }}" alt="{{ cert.title }}" class="w-full h-full object-contain rounded-lg shadow-sm bg-white p-3 border border-gray-100 dark:border-gray-800">
+            </div>
+            {% endif %}
+
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white flex-grow">{{ cert.title }}</h3>
+
+            {% if cert.link %}
+            <a href="{{ cert.link }}" target="_blank" rel="noopener noreferrer" class="mt-auto px-5 py-2 w-full bg-blue-50 dark:bg-blue-900/30 text-primary border border-blue-100 dark:border-blue-800/50 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors rounded-xl text-sm font-semibold shadow-sm">
+                View Credential
+            </a>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p class="text-gray-500 col-span-full">No certifications added yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
