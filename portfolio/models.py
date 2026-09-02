@@ -133,3 +133,17 @@ class Reference(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=200, help_text="Company Name")
+    logo = models.ImageField(upload_to='companies/')
+    link = models.URLField(max_length=255, blank=True, help_text="Optional link to the company website")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Companies"
+
+    def __str__(self):
+        return self.name

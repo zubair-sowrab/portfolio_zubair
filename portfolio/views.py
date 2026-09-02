@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Experience, Education, Project, Certification, Skill, SiteSetting, ExtraCurricular, Reference
+from .models import Experience, Education, Project, Certification, Skill, SiteSetting, ExtraCurricular, Reference, Company
 
 def portfolio_home(request):
     """Renders the main hub/overview page."""
@@ -64,3 +64,13 @@ def references_view(request):
         'settings': SiteSetting.objects.first(),
     }
     return render(request, 'portfolio/references.html', context)
+
+
+
+def portfolio_home(request):
+    """Renders the main hub/overview page."""
+    context = {
+        'settings': SiteSetting.objects.first(),
+        'companies': Company.objects.all(),
+    }
+    return render(request, 'portfolio/home.html', context)

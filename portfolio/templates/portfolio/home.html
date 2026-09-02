@@ -49,6 +49,71 @@
     </div>
 
 </section>
+
+
+
+
+
+
+
+<!-- Companies Slider Section -->
+<section class="pt-20 pb-10 overflow-hidden">
+    <div class="flex flex-col items-center gap-3 mb-10">
+        <h3 class="text-sm font-bold tracking-widest uppercase text-gray-500">Organizations I Have Worked With</h3>
+        <div class="h-px bg-gray-300 dark:bg-gray-800 w-24"></div>
+    </div>
+
+    <div class="relative w-full overflow-hidden flex items-center">
+        <!-- Overlay gradients for smooth fade on edges -->
+        <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 dark:from-darkBg to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 dark:from-darkBg to-transparent z-10 pointer-events-none"></div>
+
+        <!-- Sliding Track -->
+        <div class="logo-slider flex gap-16 items-center w-max">
+
+            <!-- Loop 1: Original Set -->
+            {% for company in companies %}
+                <a href="{{ company.link|default:'#' }}" target="_blank" class="w-40 h-20 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 flex-shrink-0">
+                    <img src="{{ company.logo.url }}" alt="{{ company.name }}" class="max-h-full max-w-full object-contain">
+                </a>
+            {% empty %}
+                <!-- Placeholders if empty -->
+                <div class="w-40 h-20 flex items-center justify-center text-gray-500 font-bold opacity-50 flex-shrink-0">Company 1</div>
+                <div class="w-40 h-20 flex items-center justify-center text-gray-500 font-bold opacity-50 flex-shrink-0">Company 2</div>
+                <div class="w-40 h-20 flex items-center justify-center text-gray-500 font-bold opacity-50 flex-shrink-0">Company 3</div>
+                <div class="w-40 h-20 flex items-center justify-center text-gray-500 font-bold opacity-50 flex-shrink-0">Company 4</div>
+            {% endfor %}
+
+            <!-- Loop 2: Duplicate Set for Seamless Infinite Scrolling -->
+            {% for company in companies %}
+                <a href="{{ company.link|default:'#' }}" target="_blank" class="w-40 h-20 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 flex-shrink-0">
+                    <img src="{{ company.logo.url }}" alt="{{ company.name }}" class="max-h-full max-w-full object-contain">
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- Animation CSS -->
+    <style>
+        @keyframes infinite-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .logo-slider {
+            animation: infinite-slide 30s linear infinite;
+        }
+        /* Pauses the slider when the user hovers over it */
+        .logo-slider:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</section>
+
+
+
+
+
 <!-- Replace the Overviews Grid section in portfolio/home.html -->
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
@@ -130,4 +195,6 @@
     </a>
 
 </section>
+
+
 {% endblock content %}
